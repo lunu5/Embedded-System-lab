@@ -19,7 +19,7 @@ void AFunc() {
     vTaskDelete(NULL);
 }
 
-void print_ESP32(void* pvParameters) 
+void print_ESP32(void* pvParameters)
 {
     /* Configure the IOMUX register for pad LED_GPIO, BTN_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
@@ -27,8 +27,6 @@ void print_ESP32(void* pvParameters)
        Technical Reference for a list of pads and their default
        functions.)
     */
-    gpio_pad_select_gpio(LED_GPIO);
-    gpio_pad_select_gpio(BTN_GPIO);
 
     /* Set the GPIO as a push/pull output */
     gpio_pad_select_gpio(LED_GPIO);
@@ -39,7 +37,7 @@ void print_ESP32(void* pvParameters)
     while (1) {
         if (gpio_get_level(BTN_GPIO)==1){
 	            printf("ESP32\n");
-                gpio_set_level(LED_GPIO, 1);      
+                gpio_set_level(LED_GPIO, 1);
         }
         else gpio_set_level(LED_GPIO, 0);
         vTaskDelay(100 / portTICK_RATE_MS);
