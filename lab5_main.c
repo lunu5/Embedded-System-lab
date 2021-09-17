@@ -37,7 +37,7 @@ void task(xTimerHandle pxTimer)
         {
             count2++;
             printf("ihaha time %d at %d ms\n", count2, (int)clock());
-            if (count1 == PRINTTIME_2)
+            if (count2 == PRINTTIME_2)
                 xTimerStop(timer2, xTicksToWait);
         }
     }
