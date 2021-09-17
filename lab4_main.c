@@ -8,7 +8,7 @@
 
 #define functionalTaskNumber 3
 #define delay 1000
-#define xTicksToWait 10000
+#define xTicksToWait 100
 
 typedef struct Data_t
 {
@@ -50,7 +50,7 @@ void vFunctionalTask(void *pv)
     {
         if (xQueueReceive(queue, (void *)&task, xTicksToWait) == pdTRUE)
         {
-            if (((task.classify == 0) && (pcTaskName == "Functional task 1")) || ((task.classify == 1) && (pcTaskName == "Functional task 2")) || ((task.classify == 2) && (pcTaskName == "Functional task 3")))
+            if (((task.classify == 0) && (strcmp(pcTaskName, "Functional task 1") == 0)) || ((task.classify == 1) && (strcmp(pcTaskName, "Functional task 2") == 0)) || ((task.classify == 2) && (strcmp(pcTaskName, "Functional task 3") == 0)))
                 printf("%s received and is executing request id %d", pcTaskName, task.taskId);
             else
             {
