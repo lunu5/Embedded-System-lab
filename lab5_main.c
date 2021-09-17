@@ -8,10 +8,10 @@
 #include <freertos/timers.h>
 
 #define xTicksToWait 0
-#define PRINTTIME_1 = 10;
-#define PRINTTIME_2 = 5;
-#define PERIOD_1 = 200;
-#define PERIOD_2 = 300;
+#define PRINTTIME_1 10;
+#define PRINTTIME_2 5;
+#define PERIOD_1 200;
+#define PERIOD_2 300;
 
 xTimerHandle timer1 = NULL;
 xTimerHandle timer2 = NULL;
