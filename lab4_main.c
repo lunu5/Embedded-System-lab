@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "sdkconfig.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -26,11 +27,11 @@ void vReceptionTask(void *pv)
         Data_t task;
         task.taskId = i;
         if (i % 2 == 0)
-            task.classify = 0;
+            task.classify = 1; //For functional task 1
         else if (i % 3 == 0)
-            task.classify = 1;
+            task.classify = 2; //For functional task 2
         else if (i % 7 == 0)
-            task.classify = 2;
+            task.classify = 3; //For functional task 3
         else
             task.classify = -1;
         task.functionRecieved = 0;
@@ -50,15 +51,15 @@ void vFunctionalTask(void *pv)
     {
         if (xQueueReceive(queue, (void *)&task, xTicksToWait) == pdTRUE)
         {
-            if (((task.classify == 0) && (strcmp(pcTaskName, "Functional task 1") == 0)) || ((task.classify == 1) && (strcmp(pcTaskName, "Functional task 2") == 0)) || ((task.classify == 2) && (strcmp(pcTaskName, "Functional task 3") == 0)))
-                printf("%s received and is executing request id %d", pcTaskName, task.taskId);
+            if (((task.classify == 1) && (!strcmp(pcTaskName, "Functional task 1"))) || ((task.classify == 2) && (!strcmp(pcTaskName, "Functional task 2"))) || ((task.classify == 3) && (!strcmp(pcTaskName, "Functional task 3"))))
+                printf("%s received and is executing request id %d \n", pcTaskName, task.taskId);
             else
             {
                 task.functionRecieved += 1;
                 if (functionalTaskNumber > task.functionRecieved)
                     xQueueSendToFront(queue, &task, xTicksToWait);
                 else
-                    printf("Error: no functional task executes request id %d", task.taskId);
+                    printf("Error: no functional task executes request id %d \n", task.taskId);
             }
         }
         vTaskDelay(delay / portTICK_RATE_MS);
