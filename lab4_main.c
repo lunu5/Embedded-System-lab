@@ -4,10 +4,11 @@
 #include "freertos/task.h"
 #include "esp_system.h"
 #include "esp_spi_flash.h"
+#include "queue.h"
 
 #define functionalTaskNumber 3
 #define delay 1000
-#define xTicksToWait 100
+#define xTicksToWait 10000
 
 typedef struct Data_t
 {
@@ -23,7 +24,7 @@ void vReceptionTask(void *pv)
     for (int i = 0;; i++)
     {
         Data_t task;
-        task.eDataID = i;
+        task.taskId = i;
         if (i % 2 == 0)
             task.classify = 0;
         else if (i % 3 == 0)
