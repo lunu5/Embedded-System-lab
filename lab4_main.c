@@ -55,7 +55,7 @@ void vFunctionalTask(void *pv)
                 if (functionalTaskNumber > task.functionRecieved)
                     xQueueSendToFront(queue, &task, xTicksToWait);
                 else
-                    printf("Error: no functional task execute request id %d", task.taskId);
+                    printf("Error: no functional task executes request id %d", task.taskId);
             }
         }
         vTaskDelay(delay / portTICK_RATE_MS);
