@@ -4,7 +4,7 @@
 #include "freertos/task.h"
 #include "esp_system.h"
 #include "esp_spi_flash.h"
-#include "queue.h"
+#include "freertos/queue.h"
 
 #define functionalTaskNumber 3
 #define delay 1000
@@ -44,12 +44,14 @@ void vReceptionTask(void *pv)
 void vFunctionalTask(void *pv)
 {
     Data_t task;
+    char *pcTaskName;
+    pcTaskName = (char *)pv;
     for (;;)
     {
         if (xQueueReceive(queue, (void *)&task, xTicksToWait) == pdTRUE)
         {
-            if (((task.classify == 0) && ((char *)pv == "Functional task 1")) || ((task.classify == 1) && ((char *)pv == "Functional task 2")) || ((task.classify == 2) && ((char *)pv == "Functional task 3")))
-                printf("%s received and is executing request id %d", (char *)pv, task.taskId);
+            if (((task.classify == 0) && (pcTaskName == "Functional task 1")) || ((task.classify == 1) && (pcTaskName == "Functional task 2")) || ((task.classify == 2) && (pcTaskName == "Functional task 3")))
+                printf("%s received and is executing request id %d", pcTaskName, task.taskId);
             else
             {
                 task.functionRecieved += 1;
