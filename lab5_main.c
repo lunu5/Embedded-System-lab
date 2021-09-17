@@ -25,8 +25,8 @@ void task(xTimerHandle pxTimer)
     {
         if (count1 < PRINTTIME_1)
         {
-            printf("ahihi time %d at %d ms\n", count1, (int)clock());
             count1++;
+            printf("ahihi time %d at %d ms\n", count1, (int)clock());
             if (count1 == PRINTTIME_1)
                 xTimerStop(timer1, xTicksToWait);
         }
@@ -35,8 +35,8 @@ void task(xTimerHandle pxTimer)
     {
         if (count2 < PRINTTIME_2)
         {
-            printf("ihaha time %d at %d ms\n", count2, (int)clock());
             count2++;
+            printf("ihaha time %d at %d ms\n", count2, (int)clock());
             if (count1 == PRINTTIME_2)
                 xTimerStop(timer2, xTicksToWait);
         }
