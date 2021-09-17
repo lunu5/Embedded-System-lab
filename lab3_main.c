@@ -19,7 +19,7 @@ void vIdleTask(void *pv)
         begin = clock();
         runTime = 0;
         printf("%s begins at %f\n", (char *)pv, (double)((double)begin / CLOCKS_PER_SEC));
-        while (runTime < idleTaskDuration)
+        while (runTime < idleTaskDuration / portTICK_RATE_MS)
             runTime += 1;
         printf("%s ends at %f from %f\n", (char *)pv, (double)((double)clock() / CLOCKS_PER_SEC), (double)((double)begin / CLOCKS_PER_SEC));
         vTaskDelay(delay / portTICK_RATE_MS);
@@ -36,7 +36,7 @@ void vPreemptTask(void *pv)
         begin = clock();
         runTime = 0;
         printf("%s begins at %f\n", (char *)pv, (double)((double)begin / CLOCKS_PER_SEC));
-        while (runTime < preemptTaskDuration)
+        while (runTime < preemptTaskDuration / portTICK_RATE_MS)
             runTime += 1;
         printf("%s ends at %f from %f\n", (char *)pv, (double)((double)clock() / CLOCKS_PER_SEC), (double)((double)begin / CLOCKS_PER_SEC));
         vTaskDelay(delay / portTICK_RATE_MS);
