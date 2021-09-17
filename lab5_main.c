@@ -44,8 +44,8 @@ void task(xTimerHandle pxTimer)
 }
 void app_main(void)
 {
-    timer1 = xTimerCreate("ahihi", PERIOD_1, pdTrue, (void *)1, task);
-    timer2 = xTimerCreate("ihaha", PERIOD_2, pdTrue, (void *)2, task);
+    timer1 = xTimerCreate("ahihi", PERIOD_1, pdTRUE, (void *)1, task);
+    timer2 = xTimerCreate("ihaha", PERIOD_2, pdTRUE, (void *)2, task);
     xTimerStart(timer1, xTicksToWait);
     xTimerStart(timer2, xTicksToWait);
 }
